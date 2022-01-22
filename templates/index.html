@@ -1,0 +1,133 @@
+<html>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+
+<body>
+  <div class="login">
+   <h1>Thailand Offshore CUI Predictor</h1>
+      <h3> Enter the following values to predict CUI severity of pipe</h3>
+ 
+      <!-- Main Input For Receiving Query to our ML -->
+     <form action="{{ url_for('predict')}}"method="post">
+      <label for="Pipe_Size">Pipe Size (NPS) :</label><br>
+      <input type="text" name="Pipe_Size" placeholder="Input Number"   /><br>
+
+      <label for="Pipe_Component">Pipe Component :</label><br>
+      <input type="radio" id="Pipe or Elbow" name="Component" value="Pipe/Elbow"  ><label>Pipe or Elbow</label><br>
+      <input type="radio" id="TEE or Valve" name="Component" value="Tee/Valve"  ><label>TEE or Valve</label><br><br>
+
+      <label for="Coating_Age">Coating Age, If unknown (Inspection Year - Installation Year) : </label><br>
+      <input type="text" name="Coating_Age" placeholder="Input Number"   />
+
+      <label for="Insulation">Insulation Material : </label><br>
+      <input type="radio" id="Mineral_Wool" name="Insulation" value="Mineral Wool"  ><label>Mineral_Wool</label><br>
+      <input type="radio" id="Foam_Glass" name="Insulation" value="Foam Glass"  ><label>Foam_Glass</label><br>   
+      <input type="radio" id="Calcium_Silicate" name="Insulation" value="Calcium Silicate"  ><label>Calcium_Silicate</label><br>   
+      <input type="radio" id="Other" name="Insulation" value="Other"  ><label>Aeroflex</label><br><br>
+
+      <label for="Avg_Temp">Average Operating Temperature in Deg F : </label><br>
+      <input type="text" name="Avg_Temp" placeholder="Input Number"   /><br>
+ 
+      <label for="Min_Temp">Minimum Operating Temperature in Deg F : </label><br>
+      <input type="text" name="Min_Temp" placeholder="Input Number"   /><br>
+ 
+      <label for="Max_Temp">Maximum Operating Temperature in Deg F : </label><br>
+      <input type="text" name="Max_Temp" placeholder="Input Number"   /><br>
+         
+      <label for="Elevation">Equipment Location, Elevation: </label><br>
+      <input type="text" name="Elevation" placeholder="Input Number"   /><br>
+ 
+      <label for="Distance_X">Equipment Location, Distance from Center in X_Axis (0=Center, 0.5=Edge): </label><br>
+      <input type="text" name="Distance_X" placeholder="Input Number"   /><br>
+ 
+      <label for="Distance_Y">Equipment Location, Distance from Center in Y_Axis (0=Center, 0.5=Edge) : </label><br>
+      <input type="text" name="Distance_Y" placeholder="Input Number"   /><br>
+
+      <label for="Jacket">Visual Inspection, Jacket Condition : </label><br>
+      <input type="radio" id="Good" name="Jacket_Condition" value="Good"  ><label>Good</label><br>
+      <input type="radio" id="Damage" name="Jacket_Condition" value="Damage"><label>Damage</label><br><br>   
+
+      <label for="Sealing">Visual Inspection, Sealing Condition : </label><br>
+      <input type="radio" id="Good" name="Sealing_Condition" value="Good"  ><label>Good</label><br>
+      <input type="radio" id="Damage" name="Sealing_Condition" value="Damage"  ><label>Damage</label><br><br>
+ 
+      <label for="Damage">Visual Inspection, Damage Area :</label><br>
+      <input type="radio" id="No_Damage" name="Damage_Area" value="No Damage"  ><label>No_Damage</label><br>
+      <input type="radio" id="Low" name="Damage_Area" value="Low"  ><label>Low</label><br>        
+      <input type="radio" id="Medium" name="Damage_Area" value="Medium"  ><label>Medium</label><br>
+      <input type="radio" id="High" name="Damage_Area" value="High"  ><label>High</label><br><br>
+
+      <br>
+      <input type="submit" class="btn" value = "Predict">
+
+
+     </form>
+ 
+
+    <h3 style="text-align:center;">{{ prediction_text }}</h3>
+    <h3>Input Data</h3>
+    {{ pipe_size_text }}
+    <br>
+    {{ pipe_component_text }}
+    <br>
+    {{ coating_text }}
+    <br>
+    {{ insulation_text }}
+    <br>
+    {{ avg_temp_text }}
+    <br>
+    {{ min_temp_text }}
+    <br>
+    {{ max_temp_text }}
+    <br>
+    {{ elevation_text }}
+    <br>
+    {{ distx_text }}
+    <br>
+    {{ disty_text }}
+    <br>
+    {{ jacket_text }}
+    <br>
+    {{ sealing_text }}
+    <br>
+    {{ damage_text }}
+    <br>
+    {{ thcr_text }}
+    <br>
+    {{ cui_risk_score_text }}
+ 
+  </div>
+ 
+ 
