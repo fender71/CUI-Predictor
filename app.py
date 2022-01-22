@@ -1,11 +1,8 @@
 #import libraries
 from flask import Flask, request, jsonify, render_template
 import pickle#Initialize the flask App
-import logging
 
 app = Flask(__name__)
-app.logger.addHandler(logging.StreamHandler(sys.stdout))
-app.logger.setLevel(logging.ERROR)
 model = pickle.load(open('model.pkl', 'rb'))
 
 #default page of our web-app
