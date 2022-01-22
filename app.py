@@ -1,5 +1,5 @@
 #import libraries
-from flask import Flask, render_template,request
+from flask import Flask, request, jsonify, render_template
 import pickle#Initialize the flask App
 app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
